@@ -16,8 +16,10 @@ void metodoBolha(int vet[], int tam){
 
 int main(){
     int vet[100], qntd, i;
+    
     // informa quantidade de numeros
     scanf("%d", &qntd);
+
     // informa os numeros do vetor
     for(i=0; i<qntd; i++){
         scanf("%d", &vet[i]);
