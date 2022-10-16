@@ -9,17 +9,18 @@
 #include<stdlib.h>
 
 void selectionSort(int *v, int tam){
+    int troca=0, compara=0;
     for(int i=0; i<tam-1; i++){
         int i_menor = i;
-
         for(int j=i+1; j<tam; j++){
+            compara++;
             if(v[j] < v[i_menor])
                 i_menor = j;
         }
-        
-    int aux = v[i];
-    v[i] = v[i_menor];
-    v[i_menor] = aux;
+        troca++;
+        int aux = v[i];
+        v[i] = v[i_menor];
+        v[i_menor] = aux;
     }
 }
 
