@@ -17,7 +17,7 @@ void ordenaBolha(palavra v[], int t){
             }
         }
     }
-    printf("z\nComparacors = %d\nTrocas = %d\n", compara, troca);
+    printf("z\nComparacoes = %d\nTrocas = %d\n", compara, troca);
 }
 
 int main(){
