@@ -1,32 +1,33 @@
 #include<stdio.h>
+#include<stdlib.h>
 
-typedef char palavra[15];
-
-void ordenaBolha(palavra v[], int t){
-    int i, j, troca=0, compara=0;
-    char temp[15];
-
-    for(i=t-1; i>0; i++){
-        for(j=0; j<i-1; j++){
-            compara++;
-            if(strcmp(v[j], v[j+1]) > 0){
-                troca++;
-                strcpy(temp, v[j]);
-                strcpy(v[j], v[j+1]);
-                strcpy(v[j+1], temp);
+void metodoBolha(int vet[], int tam){
+    int aux;
+    for(int i=tam-1; i >= 1; i--) {
+        for(int j=0; j < i ;j++) {
+            if (vet[j+1] < vet[j]) {
+                aux = vet[j+1];
+                vet[j+1] = vet[j];
+                vet[j] = aux; 
             }
         }
     }
-    printf("z\nComparacoes = %d\nTrocas = %d\n", compara, troca);
 }
 
 int main(){
+    int vet[100], qntd=0, i;
+    // informa quantidade de numeros
+    scanf("%d", &qntd);
+    // informa os numeros do vetor
+    for(i=0; i<qntd; i++){
+        scanf("%d", &vet[i]);
+    }
 
-    palavra v[] = {"Francisco", "Lucas", "Thais", "Ada", "Carlos", "Fabiano", "Maria", "Vitoria"};
-    int i;
+    // ordenando pelo metodo bolha
+    metodoBolha(vet, qntd);
 
-    ordenaBolha(v, 8);
-    for(i=0; i<8; i++)
-        printf("%s ", v[i]);
-    printf("\n");
+    // printando os elementos ordenados
+    for(i=0; i<qntd; i++){
+        printf("%d ", vet[i]);
+    }
 }

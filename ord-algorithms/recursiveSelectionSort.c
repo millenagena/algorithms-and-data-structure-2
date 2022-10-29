@@ -1,19 +1,20 @@
 #include<stdio.h>
 
 void ordSelecaoRec(int v[], int ini, int tam){
-    int min, j, menor;
+    int minimo, j, menor;
 
     if(ini == tam)
         return;
     else{
-        min = ini;
-        for(int i=ini+1; i<tam; i++){
-            min =i;
+        minimo = ini;
+        for(j=ini+1; j<tam; j++){
+            if(v[j] < v[minimo])
+                minimo = j;
         }
-    menor = v[min];
-    v[min] = v[ini];
-    v[ini] = menor;
-    ordSelecaoRec(v, ini+1, tam);
+        menor = v[minimo];
+        v[minimo] = v[ini];
+        v[ini] = menor;
+        ordSelecaoRec(v, ini+1, tam);
     }
 }
 

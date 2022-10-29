@@ -7,18 +7,31 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void insertionSort(int *v, int tam){
+// void insertionSort(int *v, int tam){
+//     int i, j, aux;
 
+//     for(int i=1; i<tam; i++){
+//         aux = v[i];
+//         j = i-1;
+//         while((j >= 0) && (aux < v[j])){
+//             v[j+1] = v[j];
+//             j--;
+//         }
+//         v[j+1]=aux;
+//     }
+// }
+
+void insertionSort(int v[], int tam){
     int i, j, aux;
 
-    for(int i=1; i<tam; i++){
-        aux = v[i];
-        j = i-1;
-        while((j >= 0) && (aux < v[j])){
-            v[j+1] = v[j];
+    for(i=1; i<tam; i++){
+        j = i; //elem que quero inserir ordenado
+        while((j>0) && (v[j]<v[j-1])){
+            aux = v[j];
+            v[j] = v[j-1];
+            v[j-1] = aux;
             j--;
         }
-        v[j+1]=aux;
     }
 }
 

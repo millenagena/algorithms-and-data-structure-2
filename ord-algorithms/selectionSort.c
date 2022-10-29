@@ -8,32 +8,46 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void selectionSort(int *v, int tam){
-    int troca=0, compara=0;
-    for(int i=0; i<tam-1; i++){
-        int i_menor = i;
-        for(int j=i+1; j<tam; j++){
-            compara++;
-            if(v[j] < v[i_menor])
-                i_menor = j;
+void troca(int v[], int i, int j){
+    int aux;
+    aux = v[i];
+    v[i] = v[j];
+    v[j] = aux;
+}
+
+void ordSelecao(int v[], int tam){
+    int minimo, menor;
+    int trocas=0, compara=0;
+    int i, j;
+
+    for(i=0; i<tam-1; i++){
+        minimo=i;
+        for(j=i+1; j<tam; j++){
+            if(v[j]<v[minimo])
+                minimo=j;
         }
-        troca++;
-        int aux = v[i];
-        v[i] = v[i_menor];
-        v[i_menor] = aux;
+        //troca(v, minimo, j);
+        menor = v[minimo];
+        v[minimo] = v[i];
+        v[i] = menor;
     }
 }
 
 int main(){
-    int tam=0, vet[tam];
-    scanf("%d", &tam); // tamanho
-    for(int i=0; i<tam; i++){
-        scanf("%d", &vet[i]); // elementos
-    }
-    selectionSort(vet, tam);
-    for(int i=0; i<tam; i++){
-        printf("%d ", vet[i]);
-    }
+    int v1[]={5,3,6,2,7,8,1,4},
+        v2[]={1,2,3,4,5,6,7,8,9,10},
+        v3[]={5,4,3,2,1};
+    int i;
 
-    return 0;
+    ordSelecao(v1,8);
+    for (i=0;i<8;i++) printf("%d ",v1[i]);
+    printf("\n");
+
+    ordSelecao(v2,10);
+    for (i=0;i<10;i++) printf("%d ",v2[i]);
+    printf("\n");
+
+    ordSelecao(v3,5);
+    for (i=0;i<5;i++) printf("%d ",v3[i]);
+    printf("\n");
 }
