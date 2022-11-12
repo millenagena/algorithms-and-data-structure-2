@@ -1,107 +1,74 @@
+#include "metodos_ord.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-// #include "metodos_ord.h"
 
-#define TAM_1 10000
+#define TAM_1 20
 #define TAM_2 25000
 #define TAM_3 50000
 #define TAM_4 75000
 #define TAM_5 100000
 
-struct Transacao{
-    char cpf[20];
-    int numero_transacao;
-    double valor_transacao;
-};
-typedef struct Transacao Transacao;
+int main() {
+  srand(time(NULL));
+  listaTransacao *transacoes_1_quick_sort_int;
+  listaTransacao *transacoes_1_heap_sort_int;
+  listaTransacao *transacoes_1_counting_sort_int;
+  
+  listaTransacao *transacoes_1_heap_sort_float;
+  listaTransacao *transacoes_1_quick_sort_float;
 
-void intercala(int v[], int e, int m, int d){
-    int *r; // vetor auxiliar para armazenar a mistura
-    int i, j, k;
+  listaTransacao *transacoes_aleatoria_base_TAM1;
 
-    r = (int *) malloc(((d+1) - e)*sizeof(int));
-    i = e;
-    j= m+1;
-    k=0;
+  transacoes_1_quick_sort_int = cria_lista();
+  transacoes_1_heap_sort_int = cria_lista();
+  transacoes_1_counting_sort_int = cria_lista();
+  
+  transacoes_1_heap_sort_float = cria_lista();
+  transacoes_1_quick_sort_float = cria_lista();
 
-    while((i <= m) && (j <= d)){
-        if(v[i] <= v[j]){
-            r[k] = v[j];
-            i++;
-        }else{
-            r[k]=v[j];
-            j++;
-        }
-        k++;
-    }
+  transacoes_aleatoria_base_TAM1 = cria_lista();
 
-    while(i<=m){
-        r[k] = v[i];
-        i++;
-        k++;
-    }
+  // insercao aleatoria
+  insere_transacao_aleatorio(transacoes_aleatoria_base_TAM1, TAM_1);
 
-    while(j<=d){
-        r[k] = v[j];
-        j++;
-        k++;
-    }
+  // for (int K = 0; K < 10; K++) {
 
-    for(i=e; i<=d; i++){
-        v[i]=r[j];
-        j++;
-    }
+  copia_lista(transacoes_aleatoria_base_TAM1, transacoes_1_quick_sort_int, TAM_1);
+  copia_lista(transacoes_aleatoria_base_TAM1, transacoes_1_heap_sort_int, TAM_1);
+  copia_lista(transacoes_aleatoria_base_TAM1, transacoes_1_counting_sort_int,TAM_1);
+  
+  copia_lista(transacoes_aleatoria_base_TAM1, transacoes_1_quick_sort_float,TAM_1);
+  copia_lista(transacoes_aleatoria_base_TAM1, transacoes_1_heap_sort_float,TAM_1);
 
-    free(r);
-}
+  // ===== TAM_1 =====
+  // ======== INT ========
 
-void mergeSort(int v[], int left, int right) {   
-        
-    if (left >= right)
-        return;
-        
-    else {
-        int m = (left + right) / 2;
-        mergeSort(v, left, m);
-        mergeSort(v, m + 1, right);
-        intercala(v, left, m, right);
-    }
-    
-}
+  // ordenacao quick sort basico
+  // quick_sort_int(transacoes_1_quick_sort_int, 0, TAM_1 - 1);
 
-int main(){
-    Transacao transacoes_1_merge_sort[TAM_1];
-    // Transacao transacoes_2[TAM_2];
-    // Transacao transacoes_1[TAM_1];
-    // Transacao transacoes_3[TAM_3];
-    // Transacao transacoes_4[TAM_4];
-    // Transacao transacoes_5[TAM_5];
-    srand(time(NULL));
+  // ordenacao heap sort
+  // heap_sort_int(transacoes_1_heap_sort_int, TAM_1 - 1);
 
-    // Gera um cpf aleatório
-    int *cpf_int;
-    cpf_int = cpf_generator();
+  // ordenacao counting sort
+  imprime_lista(transacoes_1_counting_sort_int);
+  printf("\n\nLISTA ORDENADA COM COUNTING SORT\n");
+  counting_sort(transacoes_1_counting_sort_int, TAM_1);
+  imprime_lista(transacoes_1_counting_sort_int);
 
-    // insercao aleatoria
-    for (int i = 0; i < TAM_1; i++){
-        int num_transacao = rand() % 10000;
-        double valor_transacao = (double) num_transacao / 100;
+  // ======== FLOAT ========
+  // ordenacao quick sort basico
+  // quick_sort_float(transacoes_1_quick_sort_float, 0, TAM_1 - 1);
 
-        int *cpf_int;
-        char cpf_char[11];
+  // ordenacao heap sort
+  // heap_sort_float(transacoes_1_heap_sort_float, TAM_1 - 1);
+  
 
-        transacoes_1_merge_sort[i].numero_transacao = num_transacao;
-        transacoes_1_merge_sort[i].valor_transacao = valor_transacao;
-    }
+  // ===== TAM_2 =====
 
-    // ordenacao
-    clock_t tic5 = clock();
-    mergesort_int(transacoes_1_merge_sort, 0, TAM_1 - 1);
-    clock_t toc5 = clock();
 
-    printf("merge_sort: %f seconds\n", (double)(toc5 - tic5) / CLOCKS_PER_SEC);
+  // }
 
-    return 0;
+  return 0;
 }
